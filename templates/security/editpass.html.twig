@@ -1,0 +1,47 @@
+{% extends 'users_base.html.twig' %}
+
+
+{% block body %}
+ 
+{% if app.user %}
+<div class="container text-center ">
+
+
+
+    <h1 class="cstm-title">Modifier mon mot de passe</h1>
+
+<br><br>
+<br><br>
+
+
+
+
+ <div class="grix xs4 container ">
+    <div class="col-xs4">
+        <form method="post">
+                <div class="form-field">
+                    <label for="pass">Mot de passe</label>
+                    <input type="password" name="pass" id="pass" class="form-control rounded-1" />
+                </div>
+                <div class="form-field">
+                    <label for="pass2">Confirmer le mot de passe</label>
+                    <input type="password" name="pass2" id="pass2" class="form-control rounded-1" />
+                </div>
+                <button class="btn shadow-1 rounded-1 blue">Valider</button>
+        </form>
+    </div>
+    {% for message in  app.flashes('error')  %}
+    <div class="col-xs4 container">
+        <div class="p-3 my-2 rounded-2 error">{{message}}</div>
+    </div>
+{% endfor %}
+
+</div>
+
+
+
+{% else %}
+
+<p>Vous n'êtes pas autorisé</p>
+{% endif %}
+{% endblock %}
