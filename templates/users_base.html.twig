@@ -13,17 +13,21 @@
             <link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet">
         {% endblock %}
   </head>
-
+ <button data-target="example-sidenav"
+        class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up" style="width:100%">
+         Navigation
+      </button>
+    </main>
   <body class="layout with-sidenav fixed-sidenav">
   
 
     <div id="example-sidenav" data-ax="sidenav" class="sidenav shadow-1 large fixed white">
       <div class="sidenav-header">
         <button data-target="example-sidenav" class="sidenav-trigger"><i class="fas fa-times"></i></button>
-        <img class="sidenav-logo dropshadow-1" src="your_img_path" alt="Logo" />
+        TrouveTaTable
       </div>
           <a href="{{path("user_profile")}}" class="sidenav-link ">Profil</a>
-          <a href="#" class="sidenav-link">Mes parties</a>
+          <a href="{{path("user_games")}}" class="sidenav-link">Mes parties</a>
             <div class="dropdown" id="example-dropdown" data-ax="dropdown">
               <a type="button" class=" sidenav-link dropdown-trigger">Messagerie</a>
                 <div class="dropdown-content ">
@@ -44,13 +48,10 @@
         </div>
     </div>
 {% endfor %}
+ 
     {% block body %}{% endblock %}
       <!-- Code here the main content -->
-      <button data-target="example-sidenav"
-        class="btn rounded-1 press amaranth dark-1 sidenav-trigger hide-md-up">
-          Open sidenav
-      </button>
-    </main>
+  
 
     <script src="https://cdn.jsdelivr.net/npm/axentix@1.3.3/dist/js/axentix.min.js"></script>
   </body>

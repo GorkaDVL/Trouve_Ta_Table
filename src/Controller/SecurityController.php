@@ -64,6 +64,17 @@ class SecurityController extends AbstractController
         ]);
     }
     /**
+    * @Route("/games", name="user_games")
+    */
+    public function userGames(Security $security)
+    {
+        $this->security = $security;
+        $user = $this->security->getUser();
+        return $this->render('security/userGames.html.twig', [
+            'user' => $user,
+        ]);
+    }
+    /**
     * @Route("/profile/pass/modifier", name="users_pass_modifier")
     */
     public function EditPass(Request $request,Security $security, UserPasswordEncoderInterface $encoder)

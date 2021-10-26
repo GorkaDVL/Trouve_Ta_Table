@@ -1,24 +1,35 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container text-center">
+   
 
-        {% if app.user %}
-
-
-
-            <h1>Table numéro : {{board.id}} </h1>
+        
+     <h1 class="text-center cstm-title">Table numéro : {{board.id}} </h1>
 <br><br>
-            <div class="container">
-               
-                 <h5 class="card-title">{{board.title}}</h5>
-                                    
-                                    <img src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" width="750px" height="450px" alt="">
-                                    <p class="card-text">MJ : {{board.author}}</p>
-                                    <p class="card-text">{{board.description}}</p>
-                                    <p class="card-text"> Jeu : {{board.game}}</p>
-                                    <p class="card-text"> Catégorie : {{board.category.title}}</p>
-                                    <p class="card-text"> Date de début : {{board.date | date('d/m/Y') }}</p>
+
+    
+
+  
+
+
+<div class="container cstm-container">
+
+    <div class="row">
+    
+        <div class="col-md-6">
+        <div class="card idx-card" >
+            <img src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" widht="100%" height="380vw"alt="">
+        </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card idx-card" >
+                    <div class="card-body">
+                            <p class="card-text">MJ :  {{board.author}}</p>
+                                    <p class="card-text">Description : <br> {{board.description}}</p>
+                                    <p class="card-text"> Jeu :  {{board.game}}</p>
+                                    <p class="card-text"> Joueurs : {% for joueur in board.joueurs %} {{joueur.username}} {% endfor %}</p>
+                                    <p class="card-text"> Catégorie :  {{board.category.title}}</p>
+                                    <p class="card-text"> Date de début :  {{board.date | date('d/m/Y') }}</p>
                                     {% for joueur in board.joueurs %}
                                     <p class="card-text"> Jeu : {{joueur.username}}</p>
                                     {% endfor %}
@@ -32,95 +43,49 @@
                                     {% else %}
                                     <p class="card-text"> Table : présentielle </p>
                                     {% endif %}     
-                                     {% if user.username == board.author %}           
+                                     {% if app.user and  user.username == board.author %}           
                                     <a href="{{ path('board_edit', {'id':board.id} ) }}">Modifier</a>
-                                    {% endif %}
-    </div>
-<br><br>
-    <section id="commentaires">
-    <h2>{{ board.comments | length }} Commentaires</h2>
-    <br><br><br>
-    {% for comment in board.comments %}
-        <div class="comment">
-            <div class="row">
-                <div class="col-3">
-                    {{comment.author}} (<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
-                </div>
-                <div class="col">
-                    {{comment.content | raw}}
-                </div>
+                                    {% endif %}            
+                    </div>
             </div>
         </div>
-        <br><br>
-        <hr>
-    <br><br><br>
-    {% endfor %}
-
-  
-    {{form_start(commentForm)}}
-    {{form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}})}}
-    {{form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}})}}
-    
-
-    <button class="btn btn-success">Commenter</button>
-
-    {{form_end(commentForm)}}
-
-
-    {% else %} 
-
-        
-            <h1>Table numéro : {{board.id}} </h1>
-<br><br>
-            <div class="container">
-               
-                 <h5 class="card-title">{{board.title}}</h5>
-                                    
-                                    <img src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" width="750px" height="450px" alt="">
-                                    <p class="card-text">MJ : {{board.author}}</p>
-                                    <p class="card-text">{{board.description}}</p>
-                                    <p class="card-text"> Jeu : {{board.game}}</p>
-                                    <p class="card-text"> Catégorie : {{board.category.title}}</p>
-                                    <p class="card-text"> Date de début : {{board.date | date('d/m/Y') }}</p
-                                    {% if board.full == 1 %}
-                                    <p class="card-text"> Table Complète</p>
-                                    {% else %}
-                                    <p class="card-text"> Il reste de la place !</p>
-                                    {% endif %}
-                                    {% if board.online == 1%}
-                                    <p class="card-text"> Table : En ligne</p>
-                                    {% else %}
-                                    <p class="card-text"> Table : présentielle </p>
-                                    {% endif %}     
-                                   
     </div>
-<br><br>
-    <section id="commentaires">
-    <h2>{{ board.comments | length }} Commentaires</h2>
-    <br><br><br>
+
+    <div class="row">
+        <section id="commentaires">
+            <h2>{{ board.comments | length }} Commentaires</h2>
+            <br><br><br>
     {% for comment in board.comments %}
-        <div class="comment">
-            <div class="row">
-                <div class="col-3">
-                    {{comment.author}} (<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
+                <div class="comment">
+                    <div class="row">
+                        <div class="col-3">
+                           <p class="fw-bold">{{comment.author}}</p>  (<small>{{comment.createdAt | date('d/m/Y à H:i')}}</small>)
+                        </div>
+                        <div class="col">
+                            {{comment.content | raw}}
+                        </div>
+                    </div>
                 </div>
-                <div class="col">
-                    {{comment.content | raw}}
-                </div>
-            </div>
-        </div>
-        <br><br>
-        <hr>
-    <br><br><br>
+                <br><br>
+                <hr>
+                <br><br><br>
     {% endfor %}
 
-    
-    <h3>Vous ne pouvez pas commenter si vous n'êtes pas connecté</h3>
-    <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
-   
+                {% if app.user %}
+                {{form_start(commentForm)}}
+                {{form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}})}}
+                {{form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}})}}
+                <button class="btn btn-success">Commenter</button>
+                {{form_end(commentForm)}}
+                {% else %} 
+                    <h3>Vous ne pouvez pas commenter si vous n'êtes pas connecté</h3>
+                        <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
+                {% endif %}
+        </section>
+    </div>
 
-    {% endif %}
+</div>
 
 
-    
+  <br><br><br>
 {% endblock %}

@@ -10,21 +10,24 @@
 
         {% if user == board.author %}
 
-        <h1 class="text-center">Modification d'une table </h1>
+        <h1 class="text-center cstm-title">Modification d'une table </h1>
     
 <div class="container ">
-    {{ form_start(formBoard) }}
-    {{ form_row(formBoard.title, {"label" : "Titre",'attr': {'placeholder':"Titre de la partie"}}) }}
-    {{ form_row(formBoard.description, {"label" : "Description" ,'attr': {'placeholder':"Plateforme utilisée, Fréquence des séances, Noms des joueurs et toute autre description de la future partie..."}}) }}
-    {{ form_row(formBoard.game,{"label" : "Jeu"}) }}
-    {{ form_row(formBoard.joueurs, {"label" : "Joueurs"}) }}
-    {{ form_row(formBoard.category,{"label" : "Category"}) }}
-    {{ form_row(formBoard.date, {"label" : "Date de début"}) }}
-    {{ form_row(formBoard.online, {"label" : "Si vous utilisez une table virtuelle, cochez cette case "}) }}
-    {{ form_row(formBoard.full, {"label" : "Si votre table est complète, cochez cette case "}) }}
-        <button type="sumbit" class="btn btn-success ">Modifier la table</button>
-           
-
+         <div class="card idx-card" >
+            <div class="card-body">
+        {{ form_start(formBoard) }}
+       
+        {{ form_row(formBoard.title, {"label" : "Titre",'attr': {'placeholder':"Titre de la partie"}}) }}
+        {{ form_row(formBoard.description, {"label" : "Description" ,'attr': {'placeholder':"Plateforme utilisée, Fréquence des séances, Noms des joueurs et toute autre description de la future partie..."}}) }}
+        {{ form_row(formBoard.game,{"label" : "Jeu"}) }}
+        {{ form_row(formBoard.joueurs, {"label" : "Joueurs"}) }}
+        {{ form_row(formBoard.category,{"label" : "Category"}) }}
+        {{ form_row(formBoard.date, {"label" : "Date de début"}) }}
+        {{ form_row(formBoard.online, {"label" : "Si vous utilisez une table virtuelle, cochez cette case "}) }}
+        {{ form_row(formBoard.full, {"label" : "Si votre table est complète, cochez cette case "}) }}
+            <button type="sumbit" class="btn btn-success ">Modifier la table</button>
+    </div>
+    </div>
 
 
     {{ form_end(formBoard) }}
@@ -36,9 +39,11 @@
     {% endif %}    
 
         {% else %}
-    <h1 class="text-center">Création d'une table </h1>
+    <h1 class="text-center cstm-title">Création d'une table </h1>
     
-<div class="container ">
+<div class="container cstm-container">
+    <div class="card idx-card" >
+            <div class="card-body">
     {{ form_start(formBoard) }}
 
     {{ form_row(formBoard.title, {"label" : "Titre",'attr': {'placeholder':"Titre de la partie"}}) }}
@@ -51,6 +56,7 @@
     {{ form_row(formBoard.online, {"label" : "Si vous utilisez une table virtuelle, cochez cette case "}) }}
     {{ form_row(formBoard.full, {"label" : "Si votre table est complète, cochez cette case "}) }}
     <br>
+  
     
 
 
@@ -61,7 +67,8 @@
           
         Ajouter la table
         </button>
-           
+            </div>
+    </div>
 
 
 

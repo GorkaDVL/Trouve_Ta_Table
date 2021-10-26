@@ -1,15 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Connexion</h1>
 
-    <form action="{{ path('security_login') }}" method="post">
-        <div class="form-group">
-            <input  placeholder="Adresse Email..." required name="_username" type="text" class="form-control" >
+   
+  
+<div class="container"  >
+    <div class="card idx-card" >
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+        <form action="{{ path('security_login') }}" method="post" class="text-center login_form">
+         <h1 class="text-center">Connexion</h1>
+        <div class="form-group" >
+        <br><br>
+            <input  placeholder="Email..." required name="_username" type="text" class="form-control" >
         </div>
         <br>
         <div class="form-group">
-            <input required name="_password" type="password" class="form-control">
+            <input placeholder="Email..." required name="_password" type="password" class="form-control">
         </div>
         <br>
         <div class="form-group">
@@ -17,4 +24,17 @@
         </div>
         <br>
     </form>
+     
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <img src="{{asset('images/login_img.svg')}}" style="width: 90%; height:auto;">
+
+        </div>
+        
+        </div>
+    
+    </div>
+    
+</div>
+
 {% endblock %}
