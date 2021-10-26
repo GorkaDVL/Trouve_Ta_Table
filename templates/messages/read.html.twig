@@ -1,22 +1,26 @@
 {% extends 'users_base.html.twig' %}
 
-{% block title %}Messagerie privée{% endblock %}
+{% block title %}Messagerie privée
+{% endblock %}
 
 {% block body %}
-    <section class="container-fluid center">
-        <div class="row">
-            <div class="col-xs12">
-                <h1>Boite de réception </h1>
-                <h2>{{message.title}}</h2>
-                <p>Message de {{message.sender.username}}</p>
-                <p>le {{message.createdAt|date}}</p>
-                <div >{{message.message}}</div>
-                <br><br>
-            </div>
+	<section class="container-fluid center">
+		<div class="row">
+			<div class="col-xs12">
+				<h1>Boite de réception
+				</h1>
+				<h2>{{message.title}}</h2>
+				<p>Message de
+					{{message.sender.username}}</p>
+				<p>le
+					{{message.createdAt|date}}</p>
+				<div>{{message.message}}</div>
+				<br><br>
+			</div>
 
-             
-<br><br>
-            <a href="{{path("received")}}" class="btn shadow-1 rounded-1 blue ">Retour à la boite de réception</a>
-        </div>
-    </section>
+
+			<br><br>
+			<a href="{{path("received")}}" class="btn shadow-1 rounded-1 blue ">Retour à la boite de réception</a>
+		</div>
+	</section>
 {% endblock %}

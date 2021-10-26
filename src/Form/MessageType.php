@@ -18,18 +18,18 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                "attr" =>[
-                    "class"=> "form-control"
+                "attr" => [
+                    "class" => "form-control"
                 ]
             ])
             ->add('message', TextareaType::class, [
-                "attr" =>[
-                    "class"=> "form-control"
+                "attr" => [
+                    "class" => "form-control"
                 ]
             ])
             ->add('recipient', EntityType::class, [
                 "class" => User::class,
-                "choice_label" => "username", 
+                "choice_label" => "username",
                 "attr" => [
                     "class" => "form-control"
                 ]
@@ -38,8 +38,7 @@ class MessageType extends AbstractType
                 "attr" => [
                     "class" => "btn shadow-1 rounded-1 blue"
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

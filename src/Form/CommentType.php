@@ -14,8 +14,7 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('author')
-            ->add('content')
-        ;
+            ->add('content');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

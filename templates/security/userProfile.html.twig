@@ -2,41 +2,48 @@
 
 
 {% block body %}
-{% if app.user %}
+	{% if app.user %}
 
-{% for message in  app.flashes('message')  %}
-    <div class="container" style="height:100%">
-        <div class="p-3 my-2 rounded-2 success">{{message}}</div>
-    </div>
-{% endfor %}
+		{% for message in  app.flashes('message')  %}
+			<div class="container" style="height:100%">
+				<div class="p-3 my-2 rounded-2 success">{{message}}</div>
+			</div>
+		{% endfor %}
 
-<div class="container text-center ">
-    <h1 class="cstm-title">Profil</h1>
- 
-<br><br>
-<br><br>
+		<div class="container text-center ">
+			<h1 class="cstm-title">Profil</h1>
+
+			<br><br>
+			<br><br>
 
 
-<div class="row">
-  <div class="col-12">
-    <p> Identifiant : {{app.user.username}}</p> 
-  </div>
-  <div class="col-12">
-    <p> Email : {{app.user.email}} </p> 
-  </div>
-  <div class="col-12">
-    <p> Mot de passe : ●●●●●●●●●● </p> 
-  </div>
+			<div class="row">
+				<div class="col-12">
+					<p>
+						Identifiant :
+						{{app.user.username}}</p>
+				</div>
+				<div class="col-12">
+					<p>
+						Email :
+						{{app.user.email}}
+					</p>
+				</div>
+				<div class="col-12">
+					<p>
+						Mot de passe : ●●●●●●●●●●
+					</p>
+				</div>
 
-</div>
+			</div>
 
-<a href="{{path('users_pass_modifier')}}" class="btn shadow-1 rounded-1 blue ">Modifier mon mot de passe</a>
-  
+			<a href="{{path('users_pass_modifier')}}" class="btn shadow-1 rounded-1 blue ">Modifier mon mot de passe</a>
 
-</div>
 
-{% else %}
-<p>Vous n'êtes pas autorisé</p>
-{% endif %}
+		</div>
+
+	{% else %}
+		<p>Vous n'êtes pas autorisé</p>
+	{% endif %}
 
 {% endblock %}

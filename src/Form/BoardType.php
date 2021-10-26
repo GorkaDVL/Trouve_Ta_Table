@@ -22,12 +22,12 @@ class BoardType extends AbstractType
         $builder
             ->add('title')
             ->add('description')
-             ->add('joueurs', EntityType::class, array(
+            ->add('joueurs', EntityType::class, array(
                 'class' => User::class,
                 'multiple' => true,
                 'expanded' => true,
             ))
-            
+
             ->add('game')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
@@ -35,8 +35,7 @@ class BoardType extends AbstractType
             ])
             ->add('date')
             ->add('full')
-            ->add('online')
-        ;
+            ->add('online');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

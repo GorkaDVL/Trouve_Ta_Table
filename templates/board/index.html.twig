@@ -1,36 +1,45 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container ">
-            <h1 class="cstm-title">Tables disponibles</h1>
-<br><br>
-            <div class="container">
-                <div class="row">
-                {% for board in boards %} 
-                
-                    <div class="col-sm-6 col-md-4">
-                        <div class="card idx-card" >
-                        <a href="{{ path('board_show', {'id':board.id} ) }}" class="cstm-link">
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="Card image cap">
-                            <div class="card-body">
-                                    <h5 class="card-title">{{board.title}}</h5>
-                                    <hr>
-                                    <p class="card-text">{{board.description|striptags|slice(0, 100)}}</p>
-                                    <p class="card-text"> joueur : {% for joueur in board.joueurs %} {{joueur.username}} {% endfor %}</p>
-                                    <p class="card-text"> Jeu : {{board.game}}</p>
-                                    <p class="card-text"> Date : {{board.date | date('d/m/Y') }}</p>
-                                    <br>
-                                    <a href="{{ path('board_show', {'id':board.id} ) }}" class="btn btn-primary ">Détails</a>
-                            </div>
-                            </a>
-                        </div>
-                    </div>
-                    
-                
-                    {% endfor %}
-                
-                </div>
-            </div>
-    </div>
-    
+	<div class="container ">
+		<h1 class="cstm-title">Tables disponibles</h1>
+		<br><br>
+		<div class="container">
+			<div class="row">
+				{% for board in boards %}
+
+					<div class="col-sm-6 col-md-4">
+						<div class="card idx-card">
+							<a href="{{ path('board_show', {'id':board.id} ) }}" class="cstm-link">
+								<img class="card-img-top" src="https://images.unsplash.com/photo-1578377375762-cbcc98d68af0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80" alt="Card image cap">
+								<div class="card-body">
+									<h5 class="card-title">{{board.title}}</h5>
+									<hr>
+									<p class="card-text">{{board.description|striptags|slice(0, 100)}}</p>
+									<p class="card-text">
+										joueur :
+										{% for joueur in board.joueurs %}
+											{{joueur.username}}
+										{% endfor %}
+									</p>
+									<p class="card-text">
+										Jeu :
+										{{board.game}}</p>
+									<p class="card-text">
+										Date :
+										{{board.date | date('d/m/Y') }}</p>
+									<br>
+									<a href="{{ path('board_show', {'id':board.id} ) }}" class="btn btn-primary ">Détails</a>
+								</div>
+							</a>
+						</div>
+					</div>
+
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
 {% endblock %}

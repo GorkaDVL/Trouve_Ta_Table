@@ -27,12 +27,12 @@ class BoardController extends AbstractController
     public function index(Security $security): Response
     {
 
-        $this->security =$security;
+        $this->security = $security;
         $user = $this->security->getUser();
 
-        $repo = $this->getDoctrine()->getRepository(Board::class); 
+        $repo = $this->getDoctrine()->getRepository(Board::class);
 
-        $boards = $repo->findAll(); 
+        $boards = $repo->findAll();
 
         return $this->render('board/index.html.twig', [
             'boards' => $boards,
@@ -45,35 +45,35 @@ class BoardController extends AbstractController
      * @Route("/board/new", name="board_create")
      * @Route("/board/{id}/edit", name="board_edit")
      */
-    public function form(Board $board = null, Request $request, EntityManagerInterface $manager, Security $security ){
-        
-        $this->security =$security;
+    public function form(Board $board = null, Request $request, EntityManagerInterface $manager, Security $security)
+    {
+
+        $this->security = $security;
         $user = $this->security->getUser();
-        if(!$user){
+        if (!$user) {
             return $this->redirectToRoute('board');
-        }
-        else{
+        } else {
             $user = $user->getUsername();
         }
-        
 
-        if(!$board){
+
+        if (!$board) {
             $board = new Board();
             $board->setAuthor($user);
         }
 
-        $form=$this->createForm(BoardType::class, $board);
-       
+        $form = $this->createForm(BoardType::class, $board);
+
 
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($board);
             $manager->flush();
 
-            return $this->redirectToRoute('board_show', ['id'=> $board->getId()]);
-            }
+            return $this->redirectToRoute('board_show', ['id' => $board->getId()]);
+        }
 
 
         return $this->render('board/create.html.twig', [
@@ -86,11 +86,12 @@ class BoardController extends AbstractController
     /**
      * @Route("/board/{id}", name="board_show")
      */
-    public function show(Board $board, Request $request, EntityManagerInterface $manager, Security $security){
+    public function show(Board $board, Request $request, EntityManagerInterface $manager, Security $security)
+    {
 
-        $this->security =$security;
+        $this->security = $security;
         $user = $this->security->getUser();
-        
+
 
 
         $comment = new Comment();
@@ -98,14 +99,14 @@ class BoardController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $comment->setCreatedAt(new \DateTime())
-                    ->setBoard($board);
+                ->setBoard($board);
             $manager->persist($comment);
             $manager->flush();
 
-            return $this->redirectToRoute('board_show', ['id'=> $board->getId()]);
-            }
+            return $this->redirectToRoute('board_show', ['id' => $board->getId()]);
+        }
 
 
         return $this->render('board/show.html.twig', [
@@ -114,5 +115,4 @@ class BoardController extends AbstractController
             'user' => $user
         ]);
     }
-  
 }

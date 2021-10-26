@@ -30,7 +30,7 @@ class MessagesController extends AbstractController
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $message->setSender($this->getUser());
 
             $manager = $this->getDoctrine()->getManager();
@@ -42,7 +42,7 @@ class MessagesController extends AbstractController
         }
 
         return $this->render('messages/send.html.twig', [
-            
+
             'form' => $form->createView()
         ]);
     }
@@ -51,14 +51,14 @@ class MessagesController extends AbstractController
      */
     public function received(): Response
     {
-        return $this->render('messages/received.html.twig'); 
+        return $this->render('messages/received.html.twig');
     }
     /**
      *@Route("/sent", name="sent")
      */
     public function sent(): Response
     {
-        return $this->render('messages/sent.html.twig'); 
+        return $this->render('messages/sent.html.twig');
     }
     /**
      *@Route("/read/{id}", name="read")
@@ -66,21 +66,21 @@ class MessagesController extends AbstractController
     public function read(Messages $message): Response
     {
         $message->setIsRead(true);
-        $manager = $this->getDoctrine()->getManager(); 
+        $manager = $this->getDoctrine()->getManager();
         $manager->persist($message);
         $manager->flush();
 
-        return $this->render('messages/read.html.twig', compact("message")); 
+        return $this->render('messages/read.html.twig', compact("message"));
     }
     /**
      *@Route("/delete/{id}", name="delete")
      */
     public function delete(Messages $message): Response
     {
-        $manager = $this->getDoctrine()->getManager(); 
+        $manager = $this->getDoctrine()->getManager();
         $manager->remove($message);
         $manager->flush();
 
-        return $this->redirectToRoute("received"); 
+        return $this->redirectToRoute("received");
     }
 }

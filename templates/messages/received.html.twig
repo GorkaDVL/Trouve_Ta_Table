@@ -1,44 +1,53 @@
 {% extends 'users_base.html.twig' %}
 
-{% block title %}Messagerie privée{% endblock %}
+{% block title %}Messagerie privée
+{% endblock %}
 
 {% block body %}
-    <section class="container-fluid center">
-        <div class="row">
-            <div class="col-xs12">
-                <h1>Boite de réception </h1>
-                <br><br>
-                <p>Vous avez reçus : {{app.user.received|length}} messages</p>
-                <br>
-            </div>
+	<section class="container-fluid center">
+		<div class="row">
+			<div class="col-xs12">
+				<h1>Boite de réception
+				</h1>
+				<br><br>
+				<p>Vous avez reçus :
+					{{app.user.received|length}}
+					messages</p>
+				<br>
+			</div>
 
-             <div class="grix xs4 container ">
-                <div class="col-xs1" >De </div>
-                <div class="col-xs1">Sujet</div>
-                <div class="col-xs1">Date </div>
-                <div class="col-xs1">Actions</div>
-            
-            
-            {% for message in app.user.received %}
-                {% if message.isRead == 0 %}
-                    {% set bold = "fw-bold" %}
-                {% else %}
-                    {% set bold = "" %}
-                {% endif %}
+			<div class="grix xs4 container ">
+				<div class="col-xs1">De
+				</div>
+				<div class="col-xs1">Sujet</div>
+				<div class="col-xs1">Date
+				</div>
+				<div class="col-xs1">Actions</div>
 
-                <div class="col-xs1 {{bold}}" >{{message.sender.username}}</div>
-                <div class="col-xs1 {{bold}}"><a href="{{path("read", {id:message.id})}}">{{message.title}}</a></div>
-                <div class="col-xs1 {{bold}}">{{message.createdAt|date}}</div>
-                <div class="col-xs1 {{bold}}">
-                <a href="{{ path("delete", {id:message.id}) }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-file-x-fill " viewBox="0 0 16 16">
-                <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z"/>
-                </svg></a>
-                </div>
-            {% endfor %}
-            </div>
-<br><br>
-            <a href="{{path("send")}}" class="btn shadow-1 rounded-1 blue ">Envoyer un message</a>
-        </div>
-    </section>
+
+				{% for message in app.user.received %}
+					{% if message.isRead == 0 %}
+						{% set bold = "fw-bold" %}
+					{% else %}
+						{% set bold = "" %}
+					{% endif %}
+
+					<div class="col-xs1 {{bold}}">{{message.sender.username}}</div>
+					<div class="col-xs1 {{bold}}">
+						<a href="{{path("read", {id:message.id})}}">{{message.title}}</a>
+					</div>
+					<div class="col-xs1 {{bold}}">{{message.createdAt|date}}</div>
+					<div class="col-xs1 {{bold}}">
+						<a href="{{ path("delete", {id:message.id}) }}">
+							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-file-x-fill " viewbox="0 0 16 16">
+								<path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM6.854 6.146 8 7.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 8l1.147 1.146a.5.5 0 0 1-.708.708L8 8.707 6.854 9.854a.5.5 0 0 1-.708-.708L7.293 8 6.146 6.854a.5.5 0 1 1 .708-.708z"/>
+							</svg>
+						</a>
+					</div>
+				{% endfor %}
+			</div>
+			<br><br>
+			<a href="{{path("send")}}" class="btn shadow-1 rounded-1 blue ">Envoyer un message</a>
+		</div>
+	</section>
 {% endblock %}

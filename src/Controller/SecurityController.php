@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\User;
 use App\Entity\Board;
 use App\Form\RegistrationType;
@@ -18,14 +19,15 @@ class SecurityController extends AbstractController
     /**
      * @Route("/inscription", name="security_registration")
      */
-    public function registration(Request $request,EntityManagerInterface $manager,UserPasswordEncoderInterface $encoder) {
+    public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder)
+    {
         $user = new User();
-        
+
         $form = $this->createForm(RegistrationType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $hash = $encoder->encodePassword($user, $user->getPassword());
 
             $user->setPassword($hash);
@@ -39,22 +41,24 @@ class SecurityController extends AbstractController
         return $this->render('security/registration.html.twig', [
             'form' => $form->createView()
         ]);
-
     }
     /**
      * @Route("/connexion", name="security_login")
      */
-    public function login(){
+    public function login()
+    {
         return $this->render('security/login.html.twig');
     }
-     /**
+    /**
      * @Route("/deconnexion", name="security_logout")
      */
-    public function logout(){}
+    public function logout()
+    {
+    }
 
     /**
-    * @Route("/profile", name="user_profile")
-    */
+     * @Route("/profile", name="user_profile")
+     */
     public function userProfile(Security $security)
     {
         $this->security = $security;
@@ -64,8 +68,8 @@ class SecurityController extends AbstractController
         ]);
     }
     /**
-    * @Route("/games", name="user_games")
-    */
+     * @Route("/games", name="user_games")
+     */
     public function userGames(Security $security)
     {
         $this->security = $security;
@@ -75,30 +79,26 @@ class SecurityController extends AbstractController
         ]);
     }
     /**
-    * @Route("/profile/pass/modifier", name="users_pass_modifier")
-    */
-    public function EditPass(Request $request,Security $security, UserPasswordEncoderInterface $encoder)
+     * @Route("/profile/pass/modifier", name="users_pass_modifier")
+     */
+    public function EditPass(Request $request, Security $security, UserPasswordEncoderInterface $encoder)
     {
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $manager = $this->getDoctrine()->getManager();
 
             $user = $this->getUser();
 
-            if($request->request->get('pass') == $request->request->get('pass2')){
+            if ($request->request->get('pass') == $request->request->get('pass2')) {
                 $user->setPassword($encoder->encodePassword($user, $request->request->get('pass')));
                 $manager->flush();
                 $this->addFlash('message', 'Mot de passe mis à jour');
 
                 return $this->redirectToRoute('user_profile');
-
-            }else{
+            } else {
                 $this->addFlash('error', 'Le mot de passe doit être identiques !');
             }
-
-
         }
-  
+
         return $this->render('security/editpass.html.twig');
     }
-        
 }

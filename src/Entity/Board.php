@@ -247,7 +247,7 @@ class Board
             }
         }
 
-        
+
         return $this;
     }
 

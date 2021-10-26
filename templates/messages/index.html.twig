@@ -1,18 +1,21 @@
 {% extends 'users_base.html.twig' %}
 
-{% block title %}Messagerie privée{% endblock %}
+{% block title %}Messagerie privée
+{% endblock %}
 
 {% block body %}
-    <section class="container text-center">
-        <div class="row">
-            <div class="col">
-                <h1>Mes Messages</h1>
-                <br><br>
-                <p>Résumé de la messagerie</p>
-                <p>Reçus : {{ app.user.received|length }}</p>
-                <p>Envoyés : {{ app.user.sent|length }}</p>
-                <a href="{{path("send")}}" class="btn shadow-1 rounded-1 blue">Envoyer un message</a>
-            </div>
-        </div>
-    </section>
+	<section class="container text-center">
+		<div class="row">
+			<div class="col">
+				<h1>Mes Messages</h1>
+				<br><br>
+				<p>Résumé de la messagerie</p>
+				<p>Reçus :
+					{{ app.user.received|length }}</p>
+				<p>Envoyés :
+					{{ app.user.sent|length }}</p>
+				<a href="{{path("send")}}" class="btn shadow-1 rounded-1 blue">Envoyer un message</a>
+			</div>
+		</div>
+	</section>
 {% endblock %}

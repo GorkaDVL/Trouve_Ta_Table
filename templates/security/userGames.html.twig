@@ -2,54 +2,58 @@
 
 
 {% block body %}
-{% if app.user %}
-<div class="container fx-center ">
-    <h1 class="cstm-title">Mes Tables</h1>
- 
-<br><br>
-<br><br>
+	{% if app.user %}
+		<div class="container fx-center ">
+			<h1 class="cstm-title">Mes Tables</h1>
+
+			<br><br>
+			<br><br>
 
 
-<div class="grix xs3 fx-center">
-  {% for board in app.user.boards %} 
-    <div class="card shadow-1 ">
-    <div class="card-header ">{{board.title}} <hr></div>
-    <div class="card-content ">
-    <p>
-      {{board.description}}
-    </p>
-  </div>
-   <div class="card-content ">
-    <p>
-      joueur : {% for joueur in board.joueurs %} {{joueur.username}} {% endfor %}
-    </p>
-  </div>
-  <div class="card-content ">
-    <p>
-      Jeu : {{board.game}}
-    </p>
-  </div>
-  <div class="card-content ">
-    <p>
-      Date : {{board.date | date('d/m/Y') }}
-    </p>
-  </div>
-  
-  
-  <a href="{{ path('board_show', {'id':board.id} ) }}"  class=" btn shadow-1 rounded-1 blue" style="margin-bottom: 5%; margin-left: 70%" >Détails</a>
-  
-  
-</div>
-                    {% endfor %}          
-</div>
+			<div class="grix xs3 fx-center">
+				{% for board in app.user.boards %}
+					<div class="card shadow-1 ">
+						<div class="card-header ">{{board.title}}
+							<hr></div>
+						<div class="card-content ">
+							<p>
+								{{board.description}}
+							</p>
+						</div>
+						<div class="card-content ">
+							<p>
+								joueur :
+								{% for joueur in board.joueurs %}
+									{{joueur.username}}
+								{% endfor %}
+							</p>
+						</div>
+						<div class="card-content ">
+							<p>
+								Jeu :
+								{{board.game}}
+							</p>
+						</div>
+						<div class="card-content ">
+							<p>
+								Date :
+								{{board.date | date('d/m/Y') }}
+							</p>
+						</div>
 
 
-  
+						<a href="{{ path('board_show', {'id':board.id} ) }}" class=" btn shadow-1 rounded-1 blue" style="margin-bottom: 5%; margin-left: 70%">Détails</a>
 
-</div>
 
-{% else %}
-<p>Vous n'êtes pas autorisé</p>
-{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+
+
+		</div>
+
+	{% else %}
+		<p>Vous n'êtes pas autorisé</p>
+	{% endif %}
 
 {% endblock %}
